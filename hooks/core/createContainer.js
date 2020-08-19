@@ -43,7 +43,7 @@ function createFolderContainer(pathContainer) {
     fs.mkdirSync(pathContainer);
     log('Created container folder!', 'info');
   } catch (error) {
-    if (error.code !== 'EEXIST') {
+    if (error.code === 'EEXIST') {
       log('Container folder already created!', 'info');
     } else {
       log(error, 'error');
