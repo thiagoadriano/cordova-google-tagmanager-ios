@@ -2,16 +2,33 @@
 
 This plugin will add ios packages to google tag manager and will configure the GTM file in the project.
 
-## Install Plugin
+## Dependencies
+This plugin has dependencies with Google Analytics or Firebase Analytics among other options reported by Google.
+In this link you can access more details on how to export the json container and also the dependencies that TagManager has.
 
-- execute in terminal `cordova plugin add cordova-plugin-google-tag-manager-ios --variable GTM_FILE_NAME="GTM-xxxxxxx.json" --save`
+**Google Tag Manager reference document**
+
+[https://developers.google.com/tag-manager/ios/v5](https://developers.google.com/tag-manager/ios/v5)
+
+## Install via npm
+- execute in terminal 
+```sh
+npm install cordova-plugin-google-tag-manager-ios --save
+```
+
+## Install Plugin via cordova
+
+- execute in terminal 
+```sh
+cordova plugin add cordova-plugin-google-tag-manager-ios --variable GTM_FILE_NAME="GTM-xxxxxxx.json" --save
+```
 
 ## Change the name of your config file later
 
 - In `config.xml` add configuration for plugin:
 
 ```xml
-<plugin name="cordova-plugin-google-tag-manager-ios" spec="^1.0.0">
+<plugin name="cordova-plugin-google-tag-manager-ios" spec="^1.0.1">
   <variable name="GTM_FILE_NAME" value="GTM-xxxxxxx.json" />
 </plugin>
 ```
