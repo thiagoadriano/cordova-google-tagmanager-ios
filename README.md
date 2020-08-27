@@ -28,7 +28,7 @@ cordova plugin add cordova-plugin-google-tag-manager-ios --variable GTM_FILE_NAM
 - In `config.xml` add configuration for plugin:
 
 ```xml
-<plugin name="cordova-plugin-google-tag-manager-ios" spec="^1.0.2">
+<plugin name="cordova-plugin-google-tag-manager-ios" spec="^1.0.3">
   <variable name="GTM_FILE_NAME" value="GTM-xxxxxxx.json" />
 </plugin>
 ```

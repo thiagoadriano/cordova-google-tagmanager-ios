@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-google-tag-manager-ios",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cordova plugin for adding GoogleTagManager to ios projects",
   "cordova": {
     "id": "cordova-plugin-google-tag-manager-ios",
