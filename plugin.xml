@@ -19,7 +19,7 @@
     <info>Don't forget to add your Google Tag Manager config file (`GTM-xxxxxxx.json`) to the root of your project.</info>
 
     <config-file target="config.xml" parent="/*">
-      <feature name="GoogleTagManager" />
+      <feature name="GoogleTagManager"></feature>
     </config-file>
 
     <podspec>
