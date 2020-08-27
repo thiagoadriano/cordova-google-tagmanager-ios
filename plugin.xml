@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-plugin-google-tag-manager-ios"
-    version="1.0.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="1.0.1">
         
-    <name>CordovaPluginGoogleTagManagerForIos</name>
-    <description>This plugin create and copy structure for running the Google Tag Manager in projects IOS</description>
-    <license>MIT</license>
-    <keywords>cordova, gtm, google, tag, manager, ios, plugin</keywords>
-    <repo>https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios</repo>
-    <issue>https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios/issues</issue>
+  <name>CordovaPluginGoogleTagManagerForIos</name>
+  <description>This plugin create and copy structure for running the Google Tag Manager in projects IOS</description>
+  <license>MIT</license>
+  <keywords>cordova, gtm, google, tag, manager, ios, plugin</keywords>
+  <repo>https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios</repo>
+  <issue>https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios/issues</issue>
 
-    <engines>
-        <engine name="cordova" version=">=9.0.0"/>
-        <engine name="cordova-ios" version=">=5.0.0"/>
-    </engines>
+  <engines>
+    <engine name="cordova" version=">=9.0.0"/>
+    <engine name="cordova-ios" version=">=5.0.0"/>
+  </engines>
 
-    <preference name="GTM_FILE_NAME" />
+  <preference name="GTM_FILE_NAME" default="GTM-xxxxxxx.json" />
 
-    <platform name="ios">
-        <info>Don't forget to add your Google Tag Manager config file (`GTM-xxxxxxx.json`) to the root of your project.</info>
+  <platform name="ios">
+    <info>Don't forget to add your Google Tag Manager config file (`GTM-xxxxxxx.json`) to the root of your project.</info>
 
-        <config-file target="config.xml" parent="/*">
-            <feature name="CordovaPluginGoogleTagManagerForIos"></feature>
-        </config-file>
+    <config-file target="config.xml" parent="/*">
+      <feature name="GoogleTagManager">
+        <param name="ios-package" value="GoogleTagManager" />
+    </config-file>
 
-        <podspec>
-            <config>
-                <source url="https://cdn.cocoapods.org/"/>
-            </config>
-            <pods>
-                <pod name="Firebase/Core" spec="~> 6.10" />
-                <pod name="GoogleTagManager" spec="~> 7.1" />
-            </pods>
-        </podspec>
-		
-        <hook type="after_prepare" src="hooks/main.js" />
-    </platform>
+    <podspec>
+      <config>
+        <source url="https://cdn.cocoapods.org/"/>
+      </config>
+      <pods>
+        <pod name="GoogleTagManager" />
+      </pods>
+    </podspec>
+
+    <hook type="after_prepare" src="hooks/main.js" />
+  </platform>
 
 </plugin>

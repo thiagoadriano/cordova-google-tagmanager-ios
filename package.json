@@ -13,14 +13,17 @@
     "url": "https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios.git"
   },
   "keywords": [
-    "cordova",
-    "google-tag-manager",
-    "gtm",
+    "ecosystem:cordova",
     "cordova",
     "cordova-ios",
+    "tag",
+    "gtm",
     "plugin",
+    "google",
     "manager",
-    "tag"
+    "cordova",
+    "manager",
+    "google-tag-manager"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./hooks/**/*.js ./hooks/*.js"
