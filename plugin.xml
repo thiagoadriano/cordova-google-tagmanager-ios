@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="1.0.3">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="1.0.4">
         
   <name>CordovaPluginGoogleTagManagerForIos</name>
   <description>This plugin create and copy structure for running the Google Tag Manager in projects IOS</description>
@@ -13,23 +13,21 @@
     <engine name="cordova-ios" version=">=5.0.0"/>
   </engines>
 
-  <preference name="GTM_FILE_NAME" default="GTM-xxxxxxx.json" />
+  <preference name="GTM_FILE_NAME" default="GTM-xxxxxxx.json"/>
 
   <platform name="ios">
     <info>Don't forget to add your Google Tag Manager config file (`GTM-xxxxxxx.json`) to the root of your project.</info>
 
     <config-file target="config.xml" parent="/*">
-      <feature name="GoogleTagManager">
-        <param name="ios-package" value="GoogleTagManager" />
-      </feature>
+      <feature name="GoogleTagManager" />
     </config-file>
 
     <podspec>
       <config>
-        <source url="https://cdn.cocoapods.org/" />
+        <source url="https://cdn.cocoapods.org/"/>
       </config>
       <pods>
-        <pod name="GoogleTagManager" />
+        <pod name="GoogleTagManager"/>
       </pods>
     </podspec>
 
