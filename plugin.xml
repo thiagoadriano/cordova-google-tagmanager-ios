@@ -21,11 +21,12 @@
     <config-file target="config.xml" parent="/*">
       <feature name="GoogleTagManager">
         <param name="ios-package" value="GoogleTagManager" />
+      </feature>
     </config-file>
 
     <podspec>
       <config>
-        <source url="https://cdn.cocoapods.org/"/>
+        <source url="https://cdn.cocoapods.org/" />
       </config>
       <pods>
         <pod name="GoogleTagManager" />
