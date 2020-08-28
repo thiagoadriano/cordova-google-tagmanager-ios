@@ -1,94 +1,37 @@
 const fs = require('fs');
 const path = require('path');
-const { parseString } = require('xml2js');
-const util = require('../helper/util');
+const {createPromise, generateLog, exists, readDir} = require('../helper/util');
 
-const { log } = util;
-const { promise, resolve } = util.createPromise();
-
-function objReturnFind(bolFind, strValue) {
-  return { isFind: bolFind, value: strValue };
-}
-
-function findValueVariable(variableName, listVariables) {
-  if (Array.isArray(listVariables)) {
-    const variableObj = listVariables.find((vrb) => vrb.$.name === variableName);
-    if (variableObj) {
-      return objReturnFind(true, variableObj.$.value);
-    }
-    return objReturnFind(false, 'Not found variable GTM_FILE_NAME in config.xml');
-  }
-  return objReturnFind(false, 'Not found list variables in config.xml');
-}
-
-function getValueNameFile(pluginName, listPlugins) {
-  const plugin = listPlugins.find((plg) => plg.$.name === pluginName);
-  if (plugin) {
-    return findValueVariable('GTM_FILE_NAME', plugin.variable);
-  }
-  return objReturnFind(false, 'Plugin not found in config.xml');
-}
-
-function getFileName(pluginName, contents) {
-  const { promise: prm, resolve: res, reject: rej } = util.createPromise();
-  parseString(contents, (error, resultXml) => {
-    if (error) {
-      rej(error);
-    } else {
-      const result = getValueNameFile(pluginName, resultXml.widget.plugin);
-      if (result.isFind) {
-        res(result.value);
-      } else {
-        rej(result.value);
-      }
-    }
-  });
-  return prm;
-}
+const log = generateLog('(copy file)');
+const { promise, resolve } = createPromise();
+const PATTERN_FILE = /^GTM-[A-Z]{6,8}\.json$/;
 
 function writeFile(source, targetFilePath) {
   try {
-    log('Reading the original file', 'info');
+    log('Reading the original file');
     const readSource = fs.createReadStream(source);
 
-    log('Writing the copy in the container folder', 'info');
+    log('Writing the copy in the container folder');
     readSource.pipe(fs.createWriteStream(targetFilePath));
   } catch (error) {
-    log(error, 'error');
+    log(`Error in copy file ${error}`, 'error');
   }
 }
 
 function isValidGTMNameFile(fileName) {
-  log('Check if file name is correct GTM container pattern', 'info');
-  const PATTERN_FILE = /^GTM-[A-Z]{6,}\.json$/;
   return PATTERN_FILE.test(fileName);
 }
 
-function readFile(filePath) {
-  log('Read config.xml for find GTM file name', 'info');
-  try {
-    return fs.readFileSync(filePath, 'utf-8');
-  } catch (error) {
-    log(error, 'error');
-    return null;
-  }
-}
-
 function run(root, fileName) {
-  const hasPatternGtmFile = isValidGTMNameFile(fileName);
   const pathFile = path.join(root, fileName);
   const targetFolder = path.join(root, 'platforms/ios/container');
   const targetFilePath = path.join(targetFolder, fileName);
 
-  if (!hasPatternGtmFile) {
-    log(`File name: ${fileName} does not match the pattern GTM-XXXXXXX.json`, 'error');
-  }
-
-  if (!fs.existsSync(pathFile)) {
+  if (!exists(pathFile)) {
     log(`File ${fileName} not found in ${root}`, 'error');
   }
 
-  if (!fs.existsSync(targetFilePath)) {
+  if (!exists(targetFilePath)) {
     writeFile(pathFile, targetFilePath);
     log('Successfully copied file GTM in container folder!', 'success');
   } else {
@@ -96,19 +39,25 @@ function run(root, fileName) {
   }
 }
 
+function searchGTMFile(root) {
+  log(`Find GTM file in root directory....`);
+  const files = readDir(root);
+  return files.find(name => isValidGTMNameFile(name));
+}
+
 function Main(context) {
-  log('Running copy file GTM-xxxxxxx.json to container folder...', 'start');
+  log('Running copy file GTM-xxxxxxx.json in root project to container folder', 'start');
 
   const root = context.opts.projectRoot;
-  const fileConfigPath = path.join(root, 'config.xml');
-  const fileConfigContent = readFile(fileConfigPath);
+  const fileName = searchGTMFile(root);
 
-  getFileName(context.opts.plugin.id, fileConfigContent)
-    .then((fileName) => {
-      run(root, fileName);
-      resolve();
-    })
-    .catch((error) => log(error, 'error'));
+  if (fileName) {
+    log(`File has find: ${fileName}`);
+    run(root, fileName);
+    resolve();
+  } else {
+    log(`File GTM not found!`, 'error');
+  }
 
   return promise;
 }

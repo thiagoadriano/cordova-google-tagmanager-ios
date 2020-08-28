@@ -1,5 +1,7 @@
-function log(logString, type) {
-  const PROJ = '[GoogleTagManagerForIos] »';
+const fs = require('fs');
+
+function logger(logString, type = 'info', fileExecution = '') {
+  const PROJ = '#GoogleTagManager »';
   const postfix = '\x1b[0m';
   let prefix = '';
 
@@ -18,8 +20,43 @@ function log(logString, type) {
       prefix = '\x1b[40m\x1b[36m ⊷ '; // bgBlack, fgCyan
       break;
   }
+  console.log(`${PROJ} ${fileExecution} ${prefix} ${logString} ${postfix}`);
+}
 
-  console.log(`${PROJ} ${prefix} ${logString} ${postfix}`);
+function generateLog(prefixInfo = '') {
+  return (logString, type) => logger(logString, type, prefixInfo);
+}
+
+function readDir(path) {
+  try {
+    return fs.readdirSync(path);
+  } catch(err) {
+    logger(`Error in read dir ${path}: ${err}`, 'error');
+  }
+}
+
+function exists(file) {
+  try {
+    return fs.existsSync(file);
+  } catch(err) {
+    logger(`Error in check if exists ${file}: ${err}`, 'error');
+  }
+}
+
+function writeFile(filePath, contentData) {
+  try {
+    fs.writeFileSync(filePath, contentData);
+  } catch(err) {
+    logger(`Error in write file ${filePath}: ${err}`, 'error');
+  }
+}
+
+function readFile(file) {
+  try {
+    return fs.readFileSync(file);
+  } catch(err) {
+    logger(`Error in read file ${file}: ${err}`, 'error');
+  }
 }
 
 function createPromise() {
@@ -37,4 +74,4 @@ function createPromise() {
   return objPromise;
 }
 
-module.exports = { log, createPromise };
+module.exports = { generateLog, createPromise, exists, readFile, writeFile, readDir };

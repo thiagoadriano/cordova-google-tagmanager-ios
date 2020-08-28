@@ -1,18 +1,32 @@
 const createFolder = require('./core/createContainer');
 const copyFile = require('./core/copyFile');
-const { createPromise, log } = require('./helper/util');
+const installLib = require('./core/install');
+const { createPromise, generateLog } = require('./helper/util');
 
+const log = generateLog();
 const { promise, resolve } = createPromise();
+const executions = [createFolder, copyFile, installLib];
 
-module.exports = (context) => {
+function sequencial(fn, context) {
+  fn(context).then(() => {
+    const fnExec = executions.shift();
+    if (fnExec) {
+      sequencial(fnExec, context);
+    } else {
+      resolve();
+    }
+  });
+}
+
+function Main(context) {
   if (context.opts.platforms.includes('ios')) {
     log('Running execution configuration GTM', 'start');
-    createFolder(context).then(() => {
-      copyFile(context).then(resolve);
-    });
+    sequencial(executions.shift(), context);
   } else {
-    log('Not was sync folder and file GTM. Platform is not IOS.', 'info');
+    log('Not was sync folder and file GTM. Platform is not IOS.');
     resolve();
   }
   return promise;
-};
+}
+
+module.exports = Main;
