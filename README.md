@@ -1,45 +1,27 @@
 # Cordova Plugin Google Tag Manager For IOS
 
-This plugin will add ios packages to google tag manager and will configure the GTM file in the project.
+This plugin will add the GoogleTagManager library to the project and will configure it for the project.
+
+It is necessary to add the json of the GoogleTagManager container settings to the project root.
+
+The file must have the following name GTM-xxxxxxx.json.
 
 ## Dependencies
-This plugin has dependencies with Google Analytics or Firebase Analytics among other options reported by Google.
+This plugin has dependency on Firebase Analytics.
 In this link you can access more details on how to export the json container and also the dependencies that TagManager has.
 
 **Google Tag Manager reference document**
 
 [https://developers.google.com/tag-manager/ios/v5](https://developers.google.com/tag-manager/ios/v5)
 
-## Install via npm
-- execute in terminal 
-```sh
-npm install cordova-plugin-google-tag-manager-ios --save
-```
-
 ## Install Plugin via cordova
 
 - execute in terminal 
 ```sh
-cordova plugin add cordova-plugin-google-tag-manager-ios --variable GTM_FILE_NAME="GTM-xxxxxxx.json" --save
+cordova plugin add cordova-plugin-google-tag-manager-ios --save
 ```
 
-## Change the name of your config file later
+### Note
+Among the many streams to perform the procedure of adding the plugin by cordova standard, I always found the problem in TagManagerResources.
 
-- In `config.xml` add configuration for plugin:
-
-```xml
-<plugin name="cordova-plugin-google-tag-manager-ios" spec="^1.0.4">
-  <variable name="GTM_FILE_NAME" value="GTM-xxxxxxx.json" />
-</plugin>
-```
-
-- change the value the `GTM_FILE_NAME` variable for name file json exported the Google Tag Manager.
-
-## Note
-
-The plug-in will check the container folder and the GTM file in the project when running these cordova commands:
-
-- `cordova prepare`
-- `cordova platform add`
-- `cordova build`
-- `cordova run`
+As a solution measure add a hook at the end of the build to modify the Podefile and finally add the package as well as add the container to the project.

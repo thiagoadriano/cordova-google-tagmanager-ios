@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-google-tag-manager-ios",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Cordova plugin for adding GoogleTagManager to ios projects",
   "cordova": {
     "id": "cordova-plugin-google-tag-manager-ios",
@@ -28,11 +28,10 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./hooks/**/*.js ./hooks/*.js"
   },
-  "author": "Thiago Adriano<thiago.s.adriano@gmail.com>",
+  "author": "Thiago Adriano",
   "license": "MIT",
   "dependencies": {
-    "xcode": "^3.0.1",
-    "xml2js": "^0.4.23"
+    "xcode": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^7.7.0",

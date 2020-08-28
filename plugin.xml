@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="1.0.5">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="2.0.0">
         
-  <name>CordovaPluginGoogleTagManagerForIos</name>
+  <name>Cordova Plugin GoogleTagManager For Ios</name>
   <description>This plugin create and copy structure for running the Google Tag Manager in projects IOS</description>
   <license>MIT</license>
+  <author>Thiago Adriano</author>
   <keywords>cordova, gtm, google, tag, manager, ios, plugin</keywords>
   <repo>https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios</repo>
   <issue>https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios/issues</issue>
@@ -12,26 +13,18 @@
     <engine name="cordova" version=">=9.0.0"/>
     <engine name="cordova-ios" version=">=5.0.0"/>
   </engines>
-
-  <preference name="GTM_FILE_NAME" default="GTM-xxxxxxx.json"/>
-
+  
   <platform name="ios">
-    <info>Don't forget to add your Google Tag Manager config file (`GTM-xxxxxxx.json`) to the root of your project.</info>
+    <info>Don't forget to add the GoogleTagManager container file (`GTM-xxxxxxx.json`) to the root of your project.</info>
 
     <config-file target="config.xml" parent="/*">
-      <feature name="GoogleTagManager"></feature>
+      <feature name="GoogleTagManager">
+        <param name="ios-package" value="GoogleTagManager"/>
+      </feature>
     </config-file>
 
-    <podspec>
-      <config>
-        <source url="https://cdn.cocoapods.org/"/>
-      </config>
-      <pods>
-        <pod name="GoogleTagManager"/>
-      </pods>
-    </podspec>
-
-    <hook type="after_prepare" src="hooks/main.js" />
+    <dependency id="cordova-plugin-firebase-analytics" version=">=4.3.1"/>
+    <hook type="after_build" src="hooks/main.js" />
   </platform>
 
 </plugin>
