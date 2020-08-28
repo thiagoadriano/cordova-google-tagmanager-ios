@@ -30,23 +30,25 @@ function generateLog(prefixInfo = '') {
 function readDir(path) {
   try {
     return fs.readdirSync(path);
-  } catch(err) {
+  } catch (err) {
     logger(`Error in read dir ${path}: ${err}`, 'error');
+    return null;
   }
 }
 
 function exists(file) {
   try {
     return fs.existsSync(file);
-  } catch(err) {
+  } catch (err) {
     logger(`Error in check if exists ${file}: ${err}`, 'error');
+    return null;
   }
 }
 
 function writeFile(filePath, contentData) {
   try {
     fs.writeFileSync(filePath, contentData);
-  } catch(err) {
+  } catch (err) {
     logger(`Error in write file ${filePath}: ${err}`, 'error');
   }
 }
@@ -54,8 +56,9 @@ function writeFile(filePath, contentData) {
 function readFile(file) {
   try {
     return fs.readFileSync(file);
-  } catch(err) {
+  } catch (err) {
     logger(`Error in read file ${file}: ${err}`, 'error');
+    return null;
   }
 }
 
@@ -74,4 +77,11 @@ function createPromise() {
   return objPromise;
 }
 
-module.exports = { generateLog, createPromise, exists, readFile, writeFile, readDir };
+module.exports = {
+  generateLog,
+  createPromise,
+  exists,
+  readFile,
+  writeFile,
+  readDir,
+};

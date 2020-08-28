@@ -1,7 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const xcode = require('xcode');
-const { generateLog, createPromise, readDir, writeFile } = require('../helper/util');
+const {
+  generateLog,
+  createPromise,
+  readDir,
+  writeFile,
+} = require('../helper/util');
 
 const log = generateLog('(create container)');
 const { promise, resolve } = createPromise();

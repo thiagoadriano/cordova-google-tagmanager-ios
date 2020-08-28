@@ -1,6 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const {createPromise, generateLog, exists, readDir} = require('../helper/util');
+const {
+  createPromise,
+  generateLog,
+  exists,
+  readDir,
+} = require('../helper/util');
 
 const log = generateLog('(copy file)');
 const { promise, resolve } = createPromise();
@@ -40,9 +45,9 @@ function run(root, fileName) {
 }
 
 function searchGTMFile(root) {
-  log(`Find GTM file in root directory....`);
+  log('Find GTM file in root directory....');
   const files = readDir(root);
-  return files.find(name => isValidGTMNameFile(name));
+  return files.find((name) => isValidGTMNameFile(name));
 }
 
 function Main(context) {
@@ -56,7 +61,7 @@ function Main(context) {
     run(root, fileName);
     resolve();
   } else {
-    log(`File GTM not found!`, 'error');
+    log('File GTM not found!', 'error');
   }
 
   return promise;
