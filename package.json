@@ -1,17 +1,56 @@
 {
-  "name": "cordova-plugin-google-tag-manager-ios",
-  "version": "2.0.1",
-  "description": "Cordova plugin for adding GoogleTagManager to ios projects",
+  "_args": [
+    [
+      "cordova-plugin-google-tag-manager-ios@2.0.1",
+      "/Users/tad004/Downloads/iplanner-track"
+    ]
+  ],
+  "_from": "cordova-plugin-google-tag-manager-ios@2.0.1",
+  "_id": "cordova-plugin-google-tag-manager-ios@2.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-P4rhliN3LrzE7FV1mI8AUxMdKLU0a94TmXb/dqtqin4cYjLiloxF/+9fbnM8kmKcei2dLmNHpqlH6AIgCrhkzg==",
+  "_location": "/cordova-plugin-google-tag-manager-ios",
+  "_phantomChildren": {
+    "simple-plist": "1.1.0"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-plugin-google-tag-manager-ios@2.0.1",
+    "name": "cordova-plugin-google-tag-manager-ios",
+    "escapedName": "cordova-plugin-google-tag-manager-ios",
+    "rawSpec": "2.0.1",
+    "saveSpec": null,
+    "fetchSpec": "2.0.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-google-tag-manager-ios/-/cordova-plugin-google-tag-manager-ios-2.0.1.tgz",
+  "_spec": "2.0.1",
+  "_where": "/Users/tad004/Downloads/iplanner-track",
+  "author": {
+    "name": "Thiago Adriano"
+  },
+  "bugs": {
+    "url": "https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios/issues"
+  },
   "cordova": {
     "id": "cordova-plugin-google-tag-manager-ios",
     "platforms": [
       "ios"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios.git"
+  "dependencies": {
+    "xcode": "^3.0.1"
   },
+  "description": "Cordova plugin for adding GoogleTagManager to ios projects",
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "homepage": "https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios#readme",
   "keywords": [
     "ecosystem:cordova",
     "cordova",
@@ -25,17 +64,14 @@
     "manager",
     "google-tag-manager"
   ],
-  "scripts": {
-    "lint": "./node_modules/.bin/eslint ./hooks/**/*.js ./hooks/*.js"
-  },
-  "author": "Thiago Adriano",
   "license": "MIT",
-  "dependencies": {
-    "xcode": "^3.0.1"
+  "name": "cordova-plugin-google-tag-manager-ios",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagoadriano/cordova-plugin-google-tag-manager-ios.git"
   },
-  "devDependencies": {
-    "eslint": "^7.7.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
-  }
+  "scripts": {
+    "lint": "eslint ./hooks/**/*.js ./hooks/*.js"
+  },
+  "version": "2.0.1"
 }

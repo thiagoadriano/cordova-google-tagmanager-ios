@@ -3,9 +3,12 @@ const path = require('path');
 const {
   createPromise,
   generateLog,
+} = require('../helper/util');
+
+const {
   exists,
   readDir,
-} = require('../helper/util');
+} = require('../helper/io');
 
 const log = generateLog('(copy file)');
 const { promise, resolve } = createPromise();

@@ -3,10 +3,12 @@ const path = require('path');
 const {
   createPromise,
   generateLog,
+} = require('../helper/util');
+const {
   exists,
   readFile,
   writeFile,
-} = require('../helper/util');
+} = require('../helper/io');
 
 const log = generateLog('(install)');
 const {
@@ -14,7 +16,9 @@ const {
   resolve,
   reject,
 } = createPromise();
+
 const LIB_TAG_MANAGER = 'GoogleTagManager';
+const VERSION_LIB = '7.1';
 
 function addLib(contentPod) {
   let position = 0;
@@ -29,10 +33,10 @@ function addLib(contentPod) {
   }
 
   if (position) {
-    contentPod.splice(position, 0, `\tpod '${LIB_TAG_MANAGER}'`);
-    log(`The lib ${LIB_TAG_MANAGER} add Podfile in position: ${position}.`);
+    contentPod.splice(position, 0, `\tpod '${LIB_TAG_MANAGER}', '~> ${VERSION_LIB}'`);
+    log(`The library ${LIB_TAG_MANAGER} add Podfile in position: ${position}.`);
   } else {
-    log(`The lib ${LIB_TAG_MANAGER} not add in Podfile.`);
+    log(`The library ${LIB_TAG_MANAGER} not add in Podfile.`);
   }
 
   return contentPod;
@@ -45,7 +49,7 @@ function addTagInPodFile(content) {
   const hasLibInFile = contentPod.find((row) => row.trim().includes(LIB_TAG_MANAGER));
 
   if (hasLibInFile) {
-    log(`The lib ${LIB_TAG_MANAGER} has in Podfile.`);
+    log(`The library ${LIB_TAG_MANAGER} has in Podfile.`);
   } else {
     contentPod = addLib(contentPod);
   }
@@ -65,7 +69,7 @@ function resultTerminalCommand(err, terminalData) {
     log(`Error in execute pod in terminal: ${err}`, 'error');
     reject();
   } else {
-    log(terminalData);
+    log(`\n${terminalData}`);
     log(`${LIB_TAG_MANAGER} add in project with success!`, 'success');
     resolve();
   }
@@ -77,7 +81,7 @@ function intall(projectRoot) {
 }
 
 function Main(context) {
-  log(`Init process instalation lib ${LIB_TAG_MANAGER}`, 'start');
+  log(`Init process instalation library ${LIB_TAG_MANAGER}`, 'start');
   const projectRoot = path.join(context.opts.projectRoot, 'platforms/ios');
   const podFilePath = path.join(projectRoot, 'Podfile');
 
