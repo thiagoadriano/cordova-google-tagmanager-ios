@@ -18,7 +18,7 @@
   under the License.
 -->
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="2.0.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-google-tag-manager-ios" version="2.1.0">
         
   <name>Cordova Plugin GoogleTagManager For Ios</name>
   <description>This plugin create and copy structure for running the Google Tag Manager in projects IOS</description>
